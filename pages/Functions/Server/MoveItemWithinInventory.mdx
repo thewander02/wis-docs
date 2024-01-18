@@ -1,0 +1,21 @@
+### MoveItemWithinInventory
+
+```lua
+function WIS.MoveItemWithinInventory(sourceSlotIndex, destinationSlotIndex, ply, up)
+```
+
+Moves an item from one slot to another within the player's inventory. This function is key for inventory organization, allowing players to rearrange their items as needed.
+
+#### Parameters
+| Name           | Type          | Description                                                |
+| :------------:  | :---------:   | :----------:                                                |
+| `sourceSlotIndex`          | `integer`      | The index of the slot from which the item is being moved. |
+| `destinationSlotIndex`          | `integer`      | The index of the slot to which the item is being moved. |
+| `ply`          | `Entity`      | The player entity whose inventory is being modified. |
+| `up`          | `boolean`      | A flag indicating whether to update the inventory UI. |
+
+#### Use Case
+This function is commonly used to allow players to reorganize their inventory, moving items between slots. It's an essential part of the inventory management system
+
+#### Example
+```lua

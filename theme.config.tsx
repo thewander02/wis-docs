@@ -2,16 +2,13 @@ import React from 'react'
 import { DocsThemeConfig } from 'nextra-theme-docs'
 
 const config: DocsThemeConfig = {
-  logo: <span>My Project</span>,
-  project: {
-    link: 'https://github.com/shuding/nextra-docs-template',
-  },
+  logo: <span>Wanders Inventory System</span>,
   chat: {
-    link: 'https://discord.com',
+    link: 'https://discord.gg/fHVqJyneUX',
   },
-  docsRepositoryBase: 'https://github.com/shuding/nextra-docs-template',
+  docsRepositoryBase: 'https://github.com/thewander02/wis-docs',
   footer: {
-    text: 'Nextra Docs Template',
+    text: 'Wanders Inventory System',
   },
 }
 

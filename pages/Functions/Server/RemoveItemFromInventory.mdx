@@ -1,0 +1,23 @@
+### RemoveItemFromInventory
+
+```lua
+function WIS.RemoveItemFromInventory(slotIndex, ply, up)
+```
+
+Removes an item from a specified slot in the player's inventory. This function is crucial for inventory management, allowing for the removal of items from the player's inventory.
+
+#### Parameters
+| Name            | Type          | Description                                                |
+| :------------:  | :---------:   | :----------:                                                |
+|`slotIndex` |	`integer` |	The index of the slot from which the item is to be removed. |
+|`ply` |	`Entity` |	The player entity whose inventory is being modified. |
+|`up` |	`boolean` |	A flag indicating whether to update the inventory UI. |
+
+#### Use Case
+This function is essential for operations that involve removing items from a player's inventory, such as when an item is used, dropped, or traded. It ensures that the inventory accurately reflects the player's current possessions.
+
+#### Example
+```lua
+local player = Entity(1)
+local slotToRemove = 3
+WIS.RemoveItemFromInventory(slotToRemove, player, false)

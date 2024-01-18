@@ -1,0 +1,26 @@
+### RetrieveData
+
+```lua
+WIS.RetrieveData(ply)
+```
+
+Retrieves a player's inventory data from the configuration module. This function is essential for accessing the inventory state of a player, including the items they possess and their arrangement within the inventory slots.
+
+#### Parameters
+| Name           | Type          | Description                                                |
+| :------------:  | :---------:   | :----------:                                                |
+| `ply`          | `Entity`      | The player entity whose inventory data is to be retrieved. |
+
+#### Returns
+| Name            | Type          | Description                                                |
+| :------------:  | :---------:   | :----------:                                                |
+| `playerdata`   | `Entity`      | A table containing the player's inventory data. This includes item information, slot details, and other inventory-related attributes. |
+
+#### Use Case
+This function is primarily used to fetch a player's current inventory data. It's essential for operations like displaying the inventory to the player, checking the contents before an item is added or removed, and for saving the state of the inventory.
+
+#### Example
+```lua
+local player = Entity(1)  -- Assuming 'Entity(1)' is a valid player entity
+local playerInventory = WIS.RetrieveData(player)
+PrintTable(playerInventory)

@@ -1,0 +1,40 @@
+## Rarity's
+Default rarity values
+
+| Name            | Color          |
+| :------------:  | :---------:   |
+| `Common` |	`201, 201, 201` |
+| `Uncommon` |	`96, 209, 96` |
+| `Rare` |	`79, 62, 235` |
+| `Epic` |	`151, 71, 216` |
+| `Exotic` |	`243, 211, 106` |
+| `Artifact` |	`247, 53, 53` |
+
+
+### Basic Item with all values
+```json
+{
+    name = "Item Name",
+    description = "Item Description",
+    icon = "path/to/your/file.png",
+    quantity = 1,
+    maxQuantity = 1,
+    value = 0,
+    equipable = true,
+    type = "Accessory",
+    data = {
+        stats = {
+            health = 0,
+            armor = 0,
+            speed = 0,
+            jump = 0,
+            luck = 0,
+            slots = 0,
+            custom = ""
+        },
+        onequipped = "",
+        onunequipped = "",
+        rarity = "Exotic" 
+    }
+}
+```

@@ -1,0 +1,23 @@
+### AddItemToInventory
+
+```lua
+function WIS.AddItemToInventory(itemData, ply, up)
+```
+
+Adds an item to the player's inventory in the first available slot. This function is essential for general inventory operations, particularly when adding new items to the player's possession.
+
+#### Parameters
+| Name            | Type          | Description                                                |
+| :------------:  | :---------:   | :----------:                                                |
+|`itemData` |	`table` |	The data of the item to be added to the inventory. |
+|`ply` |	`Entity` |	The player entity whose inventory is being modified. |
+|`up` |	`boolean` |	A flag indicating whether to update the inventory UI. |
+
+#### Use Case
+This function is commonly used to add new items to a player's inventory. It automatically finds an empty slot (or creates a new stack of the item if applicable) and adds the item there. It's a key function in handling loot drops, purchases, and rewards.
+
+#### Example
+```lua
+local player = Entity(1)
+local newItem = {/* new item data */}
+WIS.AddItemToInventory(newItem, player, false)

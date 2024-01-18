@@ -1,0 +1,30 @@
+### FindEmptySlot
+
+```lua
+function WIS.FindEmptySlot(ply)
+```
+
+Identifies the first empty slot in a player's inventory. This function is vital for operations that require placing items into the inventory, such as adding new items or reorganizing existing ones.
+
+#### Parameters
+| Name           | Type          | Description                                                |
+| :------------:  | :---------:   | :----------:                                                |
+| `ply`          | `Entity`      | The player entity whose inventory data is to be retrieved. |
+
+#### Returns
+| Name            | Type          | Description                                                |
+| :------------:  | :---------:   | :----------:                                                |
+| `slotIndex`   | `integer`      | The index of the first empty slot, or nil if the inventory is full. |
+
+#### Use Case
+This function is typically used when adding new items to a player's inventory, ensuring that items are placed in empty slots. It's an essential component of inventory management, preventing item overlap and maintaining order.
+
+#### Example
+```lua
+local player = Entity(1)
+local emptySlot = WIS.FindEmptySlot(player)
+if emptySlot then
+    print("Empty slot found at index: " .. emptySlot)
+else
+    print("No empty slots available.")
+end
