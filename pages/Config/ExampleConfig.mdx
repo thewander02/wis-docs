@@ -1,0 +1,46 @@
+```json
+WIS.Config = {} -- used internally
+WIS.PlayerInventory = {} -- used internally
+
+WIS.Config.SlotWidth = 96
+WIS.Config.SlotHeight = 96
+WIS.Config.DefaultSlots = 27
+
+WIS.Config.PlayerPanel = true
+WIS.Config.PlayerPanelKey = KEY_F6
+
+WIS.Config.Rarities = {
+    ["Common"] = Color(201, 201, 201),
+    ["Uncommon"] = Color(96, 209, 96),
+    ["Rare"] = Color(79, 62, 235),
+    ["Epic"] = Color(151, 71, 216),
+    ["Exotic"] = Color(243, 211, 106),
+    ["Artifact"] = Color(247, 53, 53)
+}
+
+WIS.Config.Values = {}
+
+WIS.Config.MaterialIndex = {}
+
+WIS.Config.ItemIndex = {}
+
+WIS.Config.Recipes = {}
+
+
+WIS.Config.Market = {} -- used internally
+WIS.Config.Market.Listings = {} -- used internally
+WIS.Config.Market.SellerBalance = {} -- used internally
+
+WIS.Config.PendingTrades = {} -- used internally
+
+local defaultInventoryData = {
+    slots = WIS.Config.DefaultSlots,
+    baseSlots = WIS.Config.DefaultSlots,
+    luck = 0,
+    options = {
+        ["Open Inventory"] = WIS.Config.PlayerPanelKey
+    },
+    inventory = {},
+    equipped = {},
+}
+```
