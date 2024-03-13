@@ -1,0 +1,28 @@
+### OnUse
+
+```lua
+hook.Add("WIS.OnUse", "WIS.DefaultUse", function(ply, item, inv) end)
+```
+
+Called when a item is used
+
+#### Returns
+| Name            | Type          | Description                                                |
+| :------------:  | :---------:   | :----------:                                                |
+| `ply`   | `Entity`      | The player who used the item. |
+| `item`   | `table`      | The item that was used. |
+| `inv`   | `table`      | The player who used the item's inventory. |
+
+#### Use Case
+This hook is typically used for custom items
+
+#### Example
+```lua
+hook.Add("WIS.OnUse", "WIS.DefaultUse", function(ply, item, inv)
+    local funcs = customfuncs["OnUse"]
+    for _,v in pairs(funcs) do
+        if item.name == _ then
+            v(ply, item, inv)
+        end
+    end
+end)

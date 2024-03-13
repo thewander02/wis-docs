@@ -1,7 +1,7 @@
 ### RemoveItemAMT
 
 ```lua
-function WIS.RemoveItemAMT(slotIndex, amt, ply, up)
+function WIS.RemoveItemAMT(ply, slotIndex, amt, up)
 ```
 
 Removes a specified amount of an item from a slot in the player's inventory. This function is particularly useful for handling stackable items where only a portion of the stack needs to be removed.
@@ -9,9 +9,9 @@ Removes a specified amount of an item from a slot in the player's inventory. Thi
 #### Parameters
 | Name            | Type          | Description                                                |
 | :------------:  | :---------:   | :----------:                                                |
+|`ply` |	`Entity` |	The player entity whose inventory is being modified. |
 |`slotIndex` |	`integer` |	The index of the slot from which the item is to be removed. |
 |`amt` |	`integer` |	The amount of the item to be removed. |
-|`ply` |	`Entity` |	The player entity whose inventory is being modified. |
 |`up` |	`boolean` |	A flag indicating whether to update the inventory UI. |
 
 #### Use Case
@@ -22,4 +22,4 @@ This function is used when a specific quantity of an item needs to be removed fr
 local player = Entity(1)
 local slotIndex = 4
 local amountToRemove = 2
-WIS.RemoveItemAMT(slotIndex, amountToRemove, player, false)
+WIS.RemoveItemAMT(player, slotIndex, amountToRemove, false)

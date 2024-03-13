@@ -1,0 +1,151 @@
+# Internal use of custom items
+
+Base items use the custom item system internally
+
+### Example internal implementation of custom items
+```lua
+local ConfigModule = include("/config.lua")
+
+function WIS.RetrieveData(ply)
+    return ConfigModule.LoadPlayerInventory(ply:SteamID64())
+end
+
+local customfuncs = {
+    ["OnEquip"] = {
+        ["Jetpack"] = function(ply, item)
+            local jp = ents.Create('mk1') 
+            jp:SetSlotName('mk1') 
+            jp:Spawn() 
+            jp:Attach(ply) 
+            ply.Jetted = jp 
+            ply:SetNWEntity('Jetted',jp)
+        end
+    },
+    ["OnUnequip"] = {
+        ["Jetpack"] = function(ply, item)
+            local ex = ply:GetNWEntity('Jetted')
+            if IsValid(ex) then
+                ex:Remove()
+                ply:SetNWEntity('Jetted',NULL)
+                ply.LastJetExecuted = CurTime()
+            end
+        end
+    },
+    ["OnUse"] = {
+        ["Mysterious Tablet"] = function(ply, item)
+            ply:SetHealth(ply:Health() + 50)
+            ply:SetRunSpeed(ply:GetRunSpeed() * 1.2)
+            timer.Simple(30, function()
+                ply:SetRunSpeed(ply:GetRunSpeed() / 1.2)
+            end)
+            WLIB.Chat({
+                Color(255, 255, 255),
+                "You feel",
+                Color(91, 53, 196),
+                " a surge of power",
+                Color(255, 255, 255),
+                " as you use the Mysterious Tablet."
+            }, ply)
+        end,
+        ["Raid Horn"] = function(ply, item)
+            local allies = ents.FindInSphere(ply:GetPos(), 800)
+            for _, ally in ipairs(allies) do
+                if ally:IsPlayer() and ally:Team() == ply:Team() then
+                    local inv = WIS.RetrieveData(ally)
+                    inv.resistance = inv.resistance + 5
+                    inv.healing_efficiency = inv.healing_efficiency + 5
+                    inv.damage = inv.damage + 5
+                    timer.Simple(60, function()
+                        inv.resistance = inv.resistance - 5
+                        inv.healing_efficiency = inv.healing_efficiency - 5
+                        inv.damage = inv.damage - 5
+                    end)
+                end
+            end
+            WLIB.Chat({
+                Color(255, 255, 255),
+                "You blow the Raid Horn and feel",
+                Color(91, 53, 196),
+                " a surge of power."
+            }, ply)
+        end,        
+        ["Meat Cleaver"] = function(ply, item)
+            WLIB.Chat({
+                Color(255, 255, 255),
+                "You swing the Meat Cleaver and feel",
+                Color(91, 53, 196),
+                " a surge of power."
+            }, ply)
+        end,     
+        ["Medkit"] = function(ply, item, inv)
+            ply:SetHealth(ply:GetMaxHealth())
+            timer.Simple(1, function()
+                local healAmount = ply:GetMaxHealth() - ply:Health()
+                healAmount = healAmount * (1 + (inv.healing_efficiency / 100)) 
+                local healPerSecond = healAmount / 1
+                local healInterval = 0.1
+
+                timer.Create("MedkitHeal_" .. ply:SteamID(), healInterval, 10, function()
+                    ply:SetHealth(ply:Health() + healPerSecond * healInterval)
+                end)
+            end)
+            WLIB.Chat({
+                Color(255, 255, 255),
+                "You use the Medkit and feel your",
+                Color(108, 231, 70),
+                " wounds healing."
+            }, ply)
+        end,        
+        ["Adrenaline Shot"] = function(ply, item, inv)
+            local org = ply:GetRunSpeed()
+            ply:SetRunSpeed(org * 1.5)
+            inv.resistance = inv.resistance + 5 
+            timer.Simple(20, function()
+                ply:SetRunSpeed(org / 1.5)
+                inv.resistance = inv.resistance - 5
+                WLIB.Chat({
+                    Color(255, 255, 255),
+                    "The effects of the Adrenaline Shot wear off."
+                }, ply)
+            end)
+            WLIB.Chat({
+                Color(255, 255, 255),
+                "You feel a rush of adrenaline!"
+            }, ply)
+        end,
+        ["Navagation Core"] = function(ply, item)
+            WLIB.Chat({
+                Color(255, 255, 255),
+                "You use the Navagation Core and feel",
+                Color(91, 53, 196),
+                " a surge of power."
+            }, ply)
+        end,
+    }
+}
+
+hook.Add("WIS.EquipItem", "WIS.DefaultEquip", function(ply, item, inv)
+    local funcs = customfuncs["OnEquip"]
+    for _,v in pairs(funcs) do
+        if item.name == _ then
+            v(ply, item)
+        end
+    end
+end)
+hook.Add("WIS.UnequipItem", "WIS.DefaultUnequip", function(ply, item, inv)
+    local funcs = customfuncs["OnUnequip"]
+    for _,v in pairs(funcs) do
+        if item.name == _ then
+            v(ply, item, inv)
+        end
+    end
+end)
+hook.Add("WIS.OnUse", "WIS.DefaultUse", function(ply, item, inv)
+    local funcs = customfuncs["OnUse"]
+    for _,v in pairs(funcs) do
+        if item.name == _ then
+            v(ply, item, inv)
+        end
+    end
+end)
+```

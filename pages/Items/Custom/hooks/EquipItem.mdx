@@ -1,0 +1,28 @@
+### EquipItem
+
+```lua
+hook.Add("WIS.EquipItem", "WIS.DefaultEquip", function(ply, item, inv) end)
+```
+
+Called when a item is equipped
+
+#### Returns
+| Name            | Type          | Description                                                |
+| :------------:  | :---------:   | :----------:                                                |
+| `ply`   | `Entity`      | The player who equipped the item. |
+| `item`   | `table`      | The item that was eqipped. |
+| `inv`   | `table`      | The player who equipped the item's inventory. |
+
+#### Use Case
+This hook is typically used for custom items
+
+#### Example
+```lua
+hook.Add("WIS.EquipItem", "WIS.DefaultEquip", function(ply, item, inv)
+    local funcs = customfuncs["OnEquip"]
+    for _,v in pairs(funcs) do
+        if item.name == _ then
+            v(ply, item)
+        end
+    end
+end)

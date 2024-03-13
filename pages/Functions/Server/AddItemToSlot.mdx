@@ -9,9 +9,9 @@ Adds an item to a specified slot in the player's inventory. This function is key
 #### Parameters
 | Name            | Type          | Description                                                |
 | :------------:  | :---------:   | :----------:                                                |
+|`ply` |	`Entity` |	The player entity whose inventory is being modified. |
 | `slotIndex`   | `integer`      | The index of the first empty slot, or nil if the inventory is full. |
 |`itemData` |	`table` |	The data of the item to be added to the inventory. |
-|`ply` |	`Entity` |	The player entity whose inventory is being modified. |
 |`up` |	`boolean` |	A flag indicating whether to update the inventory UI. |
 
 #### Use Case
@@ -22,4 +22,4 @@ This function is used for adding items directly to a specific slot in a player's
 local player = Entity(1)
 local slotIndex = 2  -- Assuming slot 2 is empty
 local itemData = {/* item data */}
-WIS.AddItemToSlot(slotIndex, itemData, player, false)
+WIS.AddItemToSlot(player, slotIndex, itemData, false)

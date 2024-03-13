@@ -1,0 +1,28 @@
+### UnequipItem
+
+```lua
+hook.Add("WIS.UnequipItem", "WIS.DefaultUnequip", function(ply, item, inv) end)
+```
+
+Called when a item is unequipped
+
+#### Returns
+| Name            | Type          | Description                                                |
+| :------------:  | :---------:   | :----------:                                                |
+| `ply`   | `Entity`      | The player who unequipped the item. |
+| `item`   | `table`      | The item that was uneqipped. |
+| `inv`   | `table`      | The player who eunquipped the item's inventory. |
+
+#### Use Case
+This hook is typically used for custom items
+
+#### Example
+```lua
+hook.Add("WIS.UnequipItem", "WIS.DefaultUnequip", function(ply, item, inv)
+    local funcs = customfuncs["OnUnequip"]
+    for _,v in pairs(funcs) do
+        if item.name == _ then
+            v(ply, item, inv)
+        end
+    end
+end)
